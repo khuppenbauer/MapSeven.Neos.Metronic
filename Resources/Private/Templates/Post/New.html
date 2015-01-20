@@ -1,0 +1,120 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <snippets:security.ifAuthenticated providerName="FrontendProvider">
+                        <f:then>
+                            <div class="portlet-title tabbable-line">
+                                <div class="caption">
+                                    <span class="caption-subject bold theme-font-color uppercase">New Snippet</span>
+                                </div>
+                                <ul class="nav nav-tabs">
+                                    <li  class="active">
+                                        <a href="#portlet_text" data-toggle="tab">Text</a>
+                                    </li>
+                                    <li>
+                                        <a href="#portlet_link" data-toggle="tab">Link</a>
+                                    </li>
+                                    <li>
+                                        <a href="#portlet_package" data-toggle="tab">Package</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="portlet_text">
+                                        <div class="scroller" style="height: 670px;">
+                                            <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
+                                                <f:render partial="FlashMessages" />
+                                                <div class="tabs-content">
+                                                    <br />
+                                                    <f:form.hidden property="postType" value="text" />
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'newPost'}" />
+                                                    <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'newPost', rows:3, class: 'form-control'}" />
+                                                    <f:render partial="TextareaMarkdown" arguments="{label: '{f:translate(id: \'form.content\', value: \'Content\')}', property: 'content', object: 'newPost', rows: 20, preview: true}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'newPost'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'newPost'}" />
+                                                    <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'newPost', properties: categories, identifier: 'text'}" />
+                                                    <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'newPost', properties: tags, size: 3, identifier: 'text'}"/><br />
+                                                    <f:form.submit value="{f:translate(id: 'form.submit.snippet.create', value: 'Create Snippet')}" class="btn theme" />
+                                                </div>
+                                            </f:form>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="portlet_link">
+                                        <div class="scroller" style="height: 450px;">
+                                            <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
+                                                <f:render partial="FlashMessages" />
+                                                <div class="tabs-content">
+                                                    <br />
+                                                    <f:form.hidden property="postType" value="link" />
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'newPost'}" />
+                                                    <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'newPost', rows:3, class:'form-control'}" />
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.url\', value: \'Url\')}', property: 'url', object: 'newPost'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'newPost'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'newPost'}" />
+                                                    <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'newPost', properties: categories, identifier: 'link'}" />
+                                                    <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'newPost', properties: tags, size: 3, identifier: 'link'}"/><br />
+                                                    <f:form.submit value="{f:translate(id: 'form.submit.snippet.create', value: 'Create Snippet')}" class="btn" />
+                                                </div>
+                                            </f:form>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="portlet_package">
+                                        <div class="scroller" style="height: 470px;">
+                                            <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
+                                                <f:render partial="FlashMessages" />
+                                                <div class="form-actions top">
+                                                    <a data-toggle="modal" href="packagist.html" data-target="#packagistModal" class="btn green">Packagist</a>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="packagistModal" tabindex="-1" role="dialog" aria-labelledby="Packagist" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <!-- /.modal -->
+                                                </div>
+                                                <div class="tabs-content">
+
+                                                    <div class="form-body">
+                                                        <br />
+                                                        <f:form.hidden property="postType" value="package" />
+                                                        <f:form.hidden property="package" value="" id="package"/>
+                                                        <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'newPost', identifier: 'package'}" />
+                                                        <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'newPost', rows:3, class: 'form-control', identifier: 'package'}" />
+                                                        <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.url\', value: \'Url\')}', property: 'url', object: 'newPost', identifier: 'package'}" />
+                                                        <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'newPost', identifier: 'package'}" />
+                                                        <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'newPost', identifier: 'package'}" />
+                                                        <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'newPost', properties: categories, identifier: 'package'}" />
+                                                        <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'newPost', properties: tags, size: 3, identifier: 'package'}"/><br />
+                                                        <f:form.submit value="{f:translate(id: 'form.submit.snippet.create', value: 'Create Snippet')}" class="btn" />
+                                                    </div>
+                                                </div>
+                                            </f:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <div class="portlet-title tabbable-line">
+                                <div class="caption">
+                                    <span class="caption-subject bold theme-font-color uppercase"><f:translate id="snippet.login">Login to add a new Snippet</f:translate>:</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <f:render partial="FlashMessages" />
+                                <f:render partial="Login" />
+                            </div>
+                        </f:else>
+                    </snippets:security.ifAuthenticated>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

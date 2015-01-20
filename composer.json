@@ -1,0 +1,14 @@
+{
+    "name": "mapseven/neos-metronic",
+    "type": "typo3-flow-site",
+    "description": "Integration of the Bootstrap Metronic Theme as TYPO3 Neos Site Package",
+    "require": {
+        "typo3/neos": "*",
+        "typo3/neos-nodetypes": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MapSeven\\Neos\\Snippets": "Classes"
+        }
+    }
+}

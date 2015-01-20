@@ -1,0 +1,22 @@
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner">
+        <!-- BEGIN HORIZANTAL MENU -->
+        <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+        <!-- DOC: This is desktop version of the horizontal menu. The mobile version is defined(duplicated) sidebar menu below. So the horizontal menu has 2 seperate versions -->
+        <div class="header-menu">
+            {parts.mainMenu -> f:format.raw()}
+        </div>
+        <!-- END HORIZANTAL MENU -->
+
+        <!-- BEGIN TOP NAVIGATION MENU -->
+        <div class="page-top">
+            {parts.userMenu -> f:format.raw()}
+        </div>
+        <!-- END TOP NAVIGATION MENU -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix"></div>

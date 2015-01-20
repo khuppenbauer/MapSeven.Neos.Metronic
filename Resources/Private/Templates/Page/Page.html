@@ -1,0 +1,32 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace media=TYPO3\Media\ViewHelpers}
+<f:section name="body">
+
+    <f:render partial="Header" arguments="{parts: parts}" />
+
+    <!-- Content Portfolio-->
+    <div class="main">
+        <!-- Blog -->
+        <div class="container">
+            <div class="row margin-bottom-40">
+                <div class="col-md-12 col-sm-12">
+                    <div class="content-page">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-9 blog-item">
+                                {content.main -> f:format.raw()}
+                            </div>
+                            <div class="col-md-3 col-sm-3 blog-sidebar">
+                                {content.sidebar -> f:format.raw()}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Blog -->
+    </div>
+    <!-- /Content -->
+
+    <f:render partial="Footer" arguments="{content:content, parts:parts}"/>
+    <f:render partial="Reveal" arguments="{parts:parts}"/>
+</f:section>

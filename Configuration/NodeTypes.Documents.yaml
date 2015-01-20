@@ -1,0 +1,88 @@
+# If you need more than just the "main" content area you can
+# uncomment the snippet below. It will add a "sidebar" area
+# to your pages. You can add as many areas as you like, still
+# only those that are rendered in your TypoScript and Template
+# are visible on your page.
+
+'TYPO3.Neos.NodeTypes:Page':
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+    footer:
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: Page with Footer
+
+'MapSeven.Neos.Metronic:Page':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: Page
+    icon: icon-file
+    position: 100
+    inspector:
+      groups:
+        document:
+          label: Title
+  properties:
+    'layout':
+      type: string
+      defaultValue: 'fullWidth'
+
+'MapSeven.Neos.Metronic:PageWithSidebar':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+    sidebar:
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: Page with Sidebar
+    icon: icon-file
+    position: 100
+    inspector:
+      groups:
+        document:
+          label: Title
+        layout:
+          label: Layout
+          position: 150
+  properties:
+    layout:
+      type: string
+      defaultValue: rightSidebar
+      ui:
+        label: 'Layout for this page only'
+        reloadIfChanged: true
+        inspector:
+          group: layout
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              rightSidebar:
+                label: rightsidebar
+              leftSidebar:
+                label: leftsidebar
+
+'MapSeven.Neos.Metronic:Modal':
+  superTypes:
+    - 'TYPO3.Neos:Document'
+  childNodes:
+    main:
+      type: 'TYPO3.Neos:ContentCollection'
+  ui:
+    label: Modal
+    icon: icon-file
+    position: 100
+    inspector:
+      groups:
+        document:
+          label: Title
+  properties:
+    'layout':
+      type: string
+      defaultValue: 'modal'

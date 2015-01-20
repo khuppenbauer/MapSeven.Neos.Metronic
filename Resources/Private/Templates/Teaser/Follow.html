@@ -1,0 +1,26 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<f:if condition="{post}">
+    <div class="portlet light">
+        <f:if condition="{title}">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject theme-font-color bold uppercase">{title}</span>
+                </div>
+            </div>
+        </f:if>
+        <div class="portlet-body">
+            <ul class="list-unstyled">
+                <li class="margin-bottom-10">
+                    <f:link.action action="search" arguments="{category: post.category.name}" controller="Search">{post.category.name}</f:link.action> ({post.category.numberOfPosts})
+                    <a href="#" class="jq-follow-category pull-right btn btn-xs {f:if(condition:post.category.followed, then: 'theme', else: 'btn-default')}" data-category="{post.category -> f:format.identifier()}">{f:if(condition:post.category.followed, then: 'Following', else: 'Follow')}</a>
+                </li>
+                <f:for each="{post.tags}" as="tag">
+                    <li class="margin-bottom-10">
+                        <f:link.action action="search" arguments="{tag: tag.name}" controller="Search">{tag}</f:link.action> ({tag.numberOfPosts})</span>
+                        <a href="#" class="jq-follow-tag pull-right btn btn-xs {f:if(condition:tag.followed, then: 'theme', else: 'btn-default')}" data-tag="{tag -> f:format.identifier()}">{f:if(condition:tag.followed, then: 'Following', else: 'Follow')}</a></span>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </div>
+</f:if>

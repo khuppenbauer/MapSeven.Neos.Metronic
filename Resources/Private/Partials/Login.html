@@ -1,0 +1,27 @@
+<f:render partial="FlashMessages" />
+<f:if condition="{arguments}">
+    <f:then>
+        <f:form class="custom form_container" action="authenticate" method="post" controller="Login" arguments="{arguments}" >
+            <div class="form-group">
+                <input name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][username]" class="form-control" type="text" placeholder="{f:translate(id: 'form.name', value: 'username')}" />
+            </div>
+            <div class="form-group">
+                <input name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][password]" class="form-control" type ="password" placeholder="{f:translate(id: 'form.password', value: 'password')}" />
+            </div>
+            <f:form.submit value="{f:translate(id: 'form.submit.login', value: 'Login')}" class="btn theme" />
+        </f:form>
+    </f:then>
+    <f:else>
+        <f:form class="custom form_container" action="authenticate" method="post" controller="Login" >
+            <div class="form-group">
+                <input name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][username]" class="form-control" type="text" placeholder="{f:translate(id: 'form.name', value: 'username')}" />
+            </div>
+            <div class="form-group">
+                <input name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][password]" class="form-control" type ="password" placeholder="{f:translate(id: 'form.password', value: 'password')}" />
+            </div>
+            <f:form.submit value="{f:translate(id: 'form.submit.login', value: 'Login')}" class="btn theme" />
+        </f:form>
+    </f:else>
+</f:if>
+<br />
+<p>Not yet an account? Register <a href="register.html">here</a></p>

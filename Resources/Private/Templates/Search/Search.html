@@ -1,0 +1,290 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<div class="row">
+    <f:form action="search" id="search" name="search" method="POST" object="{search}" objectName="search">
+
+        <f:form.hidden property="currentPage" id="currentpage" class="jq-hidden"/>
+        <f:form.hidden property="filter.author" id="author" class="jq-hidden"/>
+        <f:form.hidden property="filter.postType" id="posttype"/>
+        <f:form.hidden property="sortField" id="sortfield"/>
+
+        <div class="col-md-4">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject theme-font-color bold uppercase">Filter</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <f:if condition="{totalHits} > 0">
+                        <f:for each="{aggregations}" key="aggregationName" as="aggregation">
+                            <h5>{f:translate(id: aggregationName)}</h5>
+                            <f:form.select id="{aggregationName}" property="filter.{aggregationName}" options="{aggregation}" class="jq-select" multiple="multiple"/>
+                            <script>
+                                $("#{aggregationName}").multiselect({
+                                    maxHeight: 200,
+                                    enableFiltering: true,
+                                    numberDisplayed: 2,
+                                    onDropdownHide: function (event) {
+                                        $("#search").submit();
+                                    }
+                                });
+                            </script>
+                            <br/><br/>
+                        </f:for>
+
+                        <a href="#" class="jq-filter-reset btn theme">
+                            <i class="fa fa-times fa-fw"></i>
+                            <f:translate id="search.filter.reset">reset all filter</f:translate>
+                        </a>
+                    </f:if>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+        <div class="page-head">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>Search Results
+                    <small>search results</small>
+                </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+        <div class="row margin-top-20">
+            <div class="col-md-12 tabbable tabbable-custom tabbable-noborder">
+
+                <ul class="nav nav-tabs">
+                    <li
+                    {f:if(condition:postType, then: '', else: ' class="active"')}>
+                    <a href="#" data-postType="">All</a>
+                    </li>
+                    <f:for each="{types}" as="type">
+                        <f:for each="{type}" key="key" as="label">
+                            <li
+                            <f:if condition="{postType} == {key}">
+                                <f:then> class="active"</f:then>
+                            </f:if>
+                            ><a href="#" data-postType="{key}">{label}</a></li>
+                        </f:for>
+                    </f:for>
+                </ul>
+                <div class="input-group">
+
+                    <div class="input-cont">
+                        <f:form.textfield class="form-control" property="query" id="query"
+                                          placeholder="{f:translate(id: 'search.placeholder', value: 'search')}"/>
+                    </div>
+                            <span class="input-group-btn">
+                                <f:form.button value="Search" class="btn theme">
+                                    <i class="fa fa-search"></i>
+                                </f:form.button>
+                            </span>
+                </div>
+            </div>
+        </div>
+        <div class="portlet light margin-top-20">
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-3" style="margin-top: 4px;">
+                        <f:if condition="{totalHits} > 0">
+                            <f:then>
+                                <f:translate id="search.show" arguments="{0: first, 1: last, 2: totalHits}">Show {0} - {1} of {2}</f:translate>
+                            </f:then>
+                            <f:else>
+                                <f:translate id="search.noPosts">0 Posts</f:translate>
+                            </f:else>
+                        </f:if>
+                    </div>
+                    <div class="col-md-6">
+                        <f:if condition="{totalHits} > 0">
+                            <f:if condition="{sortings}">
+                                Sort by&nbsp;&nbsp;&nbsp;
+                                <f:for each="{sortings}" as="sorting">
+                                    <a href="#" class="btn btn-sm default<f:if condition="{sortField} == {sorting.key}">
+                                    <f:then> disabled</f:then>
+                            </f:if>
+                            " data-sortField="{sorting.key}"><i class="fa fa-{sorting.icon} fa-fw"></i></a>
+                            </f:for>
+                        </f:if>
+                        </f:if>
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <f:if condition="{pagination.numberOfPages} > 1">
+                            <div class="btn-group">
+                                <a href="#"
+                                   class="btn btn-sm default{f:if(condition:pagination.previousPage, then: '', else: ' disabled')}"
+                                   data-currentPage="{pagination.previousPage}"><i class="fa fa-angle-left"></i></a>
+                                <a href="#"
+                                   class="btn btn-sm default{f:if(condition:pagination.nextPage, then: '', else: ' disabled')}"
+                                   data-currentPage="{pagination.nextPage}"><i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </f:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <f:for each="{posts}" key="identifier" as="post" iteration="postIterator">
+            <div class="portlet light margin-top-20">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-4 blog-img blog-tag-data">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <time datetime="{f:format.date(date: post.date)}">
+                                        <i class="fa fa-calendar fa-fw"></i>
+                                        <f:translate id="post.date" arguments="{0: post.date}">
+                                            <![CDATA[{0,datetime,date,short}]]
+                                        </f:translate>
+                                    </time>
+                                </li>
+                                <li>
+                                    <f:if condition="{post.author.name.alias}">
+                                        <i class="fa fa-user fa-fw"></i>
+                                        <f:link.action action="search" arguments="{author: post.author.name.alias}"
+                                                       controller="Search">{post.author.name.alias}
+                                        </f:link.action>
+                                    </f:if>
+                                </li>
+                                <li>
+                                    <i class="fa fa-folder-open fa-fw"></i>
+                                    <f:link.action action="search" arguments="{category: post.category.name}"
+                                                   controller="Search">{post.category.name}
+                                    </f:link.action>
+                                </li>
+                            </ul>
+                            <ul class="list-inline blog-tags">
+                                <li>
+                                    <i class="fa fa-tags fa-fw"></i>
+                                    <f:for each="{post.tags}" as="tag" iteration="iterator">
+                                        <f:link.action action="search" arguments="{tag: tag.name}" controller="Search">
+                                            {tag.name}{f:if(condition:iterator.isLast, then: '', else: ',')}
+                                        </f:link.action>
+                                    </f:for>
+                                </li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li>
+                                    <i class="fa fa-comments fa-fw"></i>
+                                    <f:link.action action="show" controller="post" arguments="{post: post}" section="comments">
+                                        {post.numberOfComments}
+                                    </f:link.action>
+                                </li>
+                                <li>
+                                    <i class="fa fa-eye fa-fw"></i>{post.numberOfViews}
+                                </li>
+                                <li>
+                                    <i class="fa fa-thumbs{f:if(condition:post.upVote, then: '', else: '-o')}-up fa-fw"></i>{post.numberOfVotes}
+                                </li>
+                                <li>
+                                    <i class="fa fa-star{f:if(condition:post.favorite, then: '', else: '-o')} fa-fw"></i>{post.numberOfFavorites}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-8 blog-article">
+                            <h3>
+                                <f:link.action action="show" controller="post" arguments="{post: post}">{post.title}
+                                </f:link.action>
+                            </h3>
+                            <f:if condition="{post.description}">
+                                <f:then><p>{post.description}</p></f:then>
+                                <f:else><br/></f:else>
+                            </f:if>
+                            <f:if condition="{post.url}">
+                                <div class="well">
+                                    <p>
+                                        <f:translate id="post.origin">Originally Posted on</f:translate>
+                                        <f:link.external uri="{post.url}" target="_blank"><f:if condition="{post.providerIcon}"><img src="{post.providerIcon}" width="16"/></f:if>
+                                            {post.providerName}
+                                        </f:link.external>
+                                        <f:if condition="{post.authorName}">
+                                            <br />
+                                            by <f:link.external uri="{post.authorUrl}" target="_blank">{post.authorName}</f:link.external>
+                                        </f:if>
+                                    </p>
+                                    <f:if condition="{post.code}">
+                                        <f:then>
+                                            <div class="embed-{post.providerName}">
+                                                <f:format.raw>{post.code}</f:format.raw>
+                                            </div>
+                                        </f:then>
+                                        <f:else>
+                                            <f:if condition="{post.capture}">
+                                                <snippets:image resource="{post.capture}" type="thumbnail" class="img-responsive" alt="{post.title}"/>
+                                            </f:if>
+                                        </f:else>
+                                    </f:if>
+                                </div>
+                            </f:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </f:for>
+
+        <f:if condition="{pagination.numberOfPages} > 1">
+            <div class="portlet light margin-top-20">
+                <div class="portlet-body text-center">
+                    <ul class="pagination">
+                        <f:if condition="{pagination.previousPage}">
+                            <f:then>
+                                <li>
+                                    <a href="#" data-currentPage="{pagination.previousPage}"><i
+                                            class="fa fa-angle-left"></i></a>
+                                </li>
+                            </f:then>
+                            <f:else>
+                                <li class="disabled">
+                                    <a href="#"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                            </f:else>
+                        </f:if>
+                        <f:for each="{pagination.pages}" as="page">
+                            <f:if condition="{page.isCurrent}">
+                                <f:then>
+                                    <li class="active">
+                                        <a href="#" class="active">{page.number}</a>
+                                    </li>
+                                </f:then>
+                                <f:else>
+                                    <li>
+                                        <a href="#" data-currentPage="{page.number}">{page.number}</a>
+                                    </li>
+                                </f:else>
+                            </f:if>
+                        </f:for>
+
+                        <f:if condition="{pagination.nextPage}">
+                            <f:then>
+                                <li>
+                                    <a href="#" data-currentPage="{pagination.nextPage}"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            </f:then>
+                            <f:else>
+                                <li class="disabled">
+                                    <a href="#"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            </f:else>
+                        </f:if>
+                    </ul>
+                </div>
+            </div>
+        </f:if>
+
+
+        <!--end tabbable-->
+        </div>
+    </f:form>
+</div>
+<script>
+    //reset all settings when new search is performed
+    $("#search").submit(function () {
+        var oldValue = "{search.query}";
+        var newValue = $("input#query").val();
+        if (oldValue != newValue) {
+            $("select.jq-select").val('');
+            $("input.jq-hidden").val('');
+        }
+    });
+</script>

@@ -1,0 +1,41 @@
+<script type="text/javascript" language="javascript" class="init">
+
+    $(document).ready(function() {
+        $('#datatable').dataTable( {
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/Packagist/search",
+            "lengthMenu": [[15], [15]],
+            "oSearch": {"sSearch": "typo3-flow"},
+            "ordering": false,
+            "bLengthChange": false,
+            "stateSave": true,
+            "pagingType": "full_numbers",
+            "columns": [
+                { "data": "title" },
+                { "data": "description" },
+                { "data": "downloads" },
+                { "data": "favers" },
+                { "data": "button" }
+            ]
+        } );
+    } );
+</script>
+<div class="table-container">
+    <table class="table table-striped table-hover" id="datatable">
+
+        <thead>
+        <tr role="row" class="heading">
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>

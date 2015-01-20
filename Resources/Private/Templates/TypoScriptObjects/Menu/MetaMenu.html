@@ -1,0 +1,4 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<f:for each="{items}" as="item" iteration="menuItemIterator">
+    <neos:link.node node="{item.node}">{item.label}</neos:link.node>{f:if(condition:menuItemIterator.isLast, then: '', else: '&sdot;')}
+</f:for>

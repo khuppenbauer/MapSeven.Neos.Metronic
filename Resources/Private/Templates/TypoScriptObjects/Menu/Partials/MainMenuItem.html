@@ -1,0 +1,4 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<li class="classic-menu-dropdown {f:if(condition: '{0: item.state} == {0: \'current\'}', then: 'active', else: item.state)}">
+    <neos:link.node node="{item.node}">{item.label}</neos:link.node>
+</li>

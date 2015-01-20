@@ -1,0 +1,50 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<f:if condition="{posts}">
+    <f:then>
+        <div class="portlet light">
+            <f:if condition="{title}">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject theme-font-color bold uppercase">{title}</span>
+                    </div>
+                </div>
+            </f:if>
+            <div class="portlet-body">
+                <ul class="nav nav-pills nav-stacked">
+                    <f:for each="{posts}" key="identifier" as="post" iteration="postIterator">
+                        <f:if condition="{post.url}">
+                            <f:then>
+                                <li><f:link.external uri="{post.url}" target="_blank">{post.title}</f:link.external></li>
+                            </f:then>
+                            <f:else>
+                                <li><f:link.action action="show" controller="post" arguments="{post: post}">{post.title}</f:link.action></li>
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                </ul>
+            </div>
+        </div>
+    </f:then>
+    <f:else>
+        <f:if condition="{words}">
+
+            <script type="text/javascript">
+                var word_list = {words -> f:format.htmlentitiesDecode()}
+                $(function() {
+                    $("#word_list").jQCloud(word_list);
+                });
+            </script>
+            <div class="portlet light">
+                <f:if condition="{title}">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject theme-font-color bold uppercase">{title}</span>
+                        </div>
+                    </div>
+                </f:if>
+                <div class="portlet-body">
+                    <div id="word_list" style="width: 100%; height: 200px;"></div>
+                </div>
+        </f:if>
+    </f:else>
+</f:if>

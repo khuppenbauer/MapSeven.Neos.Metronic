@@ -1,0 +1,17 @@
+{namespace user=Flowpack\Neos\FrontendUserManager\ViewHelpers}
+<f:flashMessages as="flashMessages">
+    <div id="loginFlashMessage" class="reveal-modal small" data-reveal>
+        <f:for each="{flashMessages}" as="flashMessage">
+            {flashMessage}
+        </f:for>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+</f:flashMessages>
+<user:form action="authenticate" actionUri="self" method="post" class="login-form">
+    <div class="input-group">
+        <input class="form-control custom input-sm" name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][username]" type="text" placeholder="username" />
+        <input class="form-control custom input-sm" name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][password]" type ="password" placeholder="password" />
+        <f:form.button class="btn custom"><i class="icon-login"></i></f:form.button>
+
+    </div>
+ </user:form>

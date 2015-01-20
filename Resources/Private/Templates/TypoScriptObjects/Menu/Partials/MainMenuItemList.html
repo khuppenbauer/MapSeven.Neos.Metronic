@@ -1,0 +1,4 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+<f:for each="{items}" as="item" iteration="menuItemIterator">
+    <f:render partial="MainMenuItem" arguments="{item: item}" />
+</f:for>

@@ -1,0 +1,37 @@
+<f:if condition="{isAuthenticated}">
+    <f:then>
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                <li class="separator hide"></li>
+                <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    {notification -> f:format.raw()}
+                </li>
+                <li class="separator hide"></li>
+                <li class="dropdown dropdown-user dropdown-dark">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        <span class="username username-hide-on-mobile">
+                        {user.name.alias} </span>
+                        <img alt="" class="img-circle" src="http://www.gravatar.com/avatar?d=mm">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-default">
+                        <f:render partial="UserMenuItemList" arguments="{items: items, site: site}" />
+                    </ul>
+                </li>
+                <li class="separator hide"></li>
+                <li class="dropdown dropdown-quick-sidebar-toggler">
+                    {logout -> f:format.raw()}
+                </li>
+            </ul>
+        </div>
+    </f:then>
+    <f:else>
+        {login -> f:format.raw()}
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown dropdown-user dropdown-dark">
+                    <a href="register.html" class="dropdown-toggle">Register</a>
+                </li>
+            </ul>
+        </div>
+    </f:else>
+</f:if>

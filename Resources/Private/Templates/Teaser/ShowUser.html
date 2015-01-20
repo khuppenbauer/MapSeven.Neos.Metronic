@@ -1,0 +1,52 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<f:if condition="{post}">
+    <div class="portlet light profile-sidebar-portlet">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+            <img alt="" class="img-responsive" src="http://www.gravatar.com/avatar?d=mm">
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+            <div class="profile-usertitle-name">
+                {post.author.name.alias}
+            </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <f:if condition="{user}">
+            <div class="profile-userbuttons">
+                <a href="#" class="jq-follow-user btn btn-circle btn-sm {f:if(condition:post.author.followed, then: 'theme', else: 'btn-default')}" data-user="{post.author -> f:format.identifier()}">{f:if(condition:post.author.followed, then: 'Following', else: 'Follow')}</a>
+            </div>
+        </f:if>
+        <!-- END SIDEBAR BUTTONS -->
+        <!-- SIDEBAR MENU -->
+        <div class="row list-separated profile-stat">
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="uppercase profile-stat-title">
+                    {post.author.numberOfPosts}
+                </div>
+                <div class="uppercase profile-stat-text" id="jq-user-posts">
+                    <f:link.action action="search" arguments="{author: post.author.name.alias}" controller="Search">Snippets</f:link.action><br />
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="uppercase profile-stat-title" id="jq-user-followers">
+                    {post.author.numberOfFollowers}
+                </div>
+                <div class="uppercase profile-stat-text">
+                    Followers
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="uppercase profile-stat-title" id="jq-user-following">
+                    {post.author.numberOfFollowedUsers}
+                </div>
+                <div class="uppercase profile-stat-text">
+                    Following
+                </div>
+            </div>
+        </div>
+        <!-- END MENU -->
+    </div>
+</f:if>
