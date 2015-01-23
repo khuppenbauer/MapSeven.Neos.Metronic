@@ -29,10 +29,9 @@
                                     }
                                 });
                             </script>
-                            <br/><br/>
                         </f:for>
 
-                        <a href="#" class="jq-filter-reset btn theme">
+                        <a href="#" class="jq-filter-reset btn theme margin-top-20">
                             <i class="fa fa-times fa-fw"></i>
                             <f:translate id="search.filter.reset">reset all filter</f:translate>
                         </a>
@@ -188,8 +187,10 @@
                                 </f:link.action>
                             </h3>
                             <f:if condition="{post.description}">
-                                <f:then><p>{post.description}</p></f:then>
-                                <f:else><br/></f:else>
+                                <p>{post.description}</p>
+                            </f:if>
+                            <f:if condition="{post.content}">
+                                <p><snippets:truncateText text="{post.content -> snippets:parsedown()}" length="250"/></p>
                             </f:if>
                             <f:if condition="{post.url}">
                                 <div class="well">
