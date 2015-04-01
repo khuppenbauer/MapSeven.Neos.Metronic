@@ -196,7 +196,8 @@ pre code {
     padding: 0;
 }
 
-.embed-YouTube {
+.embed-YouTube,
+.embed-SpeakerDeck {
     display: block;
     height: 0;
     overflow: hidden;
@@ -206,7 +207,8 @@ pre code {
 
 }
 
-.embed-YouTube iframe {
+.embed-YouTube iframe,
+.embed-SpeakerDeck iframe{
     border: 0 none;
     bottom: 0;
     height: 100%;
