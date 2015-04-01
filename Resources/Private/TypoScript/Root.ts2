@@ -54,7 +54,7 @@ page = Page {
 				templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/TypoScriptObjects/Menu/UserMenu.html'
 				userObject = ${Configuration.setting('Flowpack.Neos.FrontendUserManager.userObject')}
 				providerName = ${Configuration.setting('Flowpack.Neos.FrontendUserManager.providerName')}
-				user = ${Authentication.identifier(this.userObject)}
+				user = ${Authentication.identifier(Configuration.setting('Flowpack.Neos.FrontendUserManager.userObject'))}
 				isAuthenticated = ${Authentication.isAuthenticated(this.providerName)}
 				login = Flowpack.Neos.FrontendUserManager:Login
 				logout = Flowpack.Neos.FrontendUserManager:Logout
@@ -63,7 +63,7 @@ page = Page {
 					entryIdentifier {
 						documentNode = ${documentNode}
 						domain = ${site.context.currentDomain}
-						authenticationIdentifier = ${Authentication.identifier(this.userObject, 'identifier')}
+						authenticationIdentifier = ${Authentication.identifier(Configuration.setting('Flowpack.Neos.FrontendUserManager.userObject'), 'identifier')}
 						authenticated = ${Authentication.isAuthenticated(this.providerName)}
 					}
 				}
