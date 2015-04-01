@@ -97,6 +97,10 @@
     margin-top: 0;
 }
 
+.blog-tag-data li a {
+    margin-right: 0;
+}
+
 .article-block h3 {
     margin-bottom: 20px;
 }

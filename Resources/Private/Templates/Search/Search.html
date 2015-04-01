@@ -30,7 +30,7 @@
                                 });
                             </script>
                         </f:for>
-
+                        <br />
                         <a href="#" class="jq-filter-reset btn theme margin-top-20">
                             <i class="fa fa-times fa-fw"></i>
                             <f:translate id="search.filter.reset">reset all filter</f:translate>
@@ -129,7 +129,7 @@
                 <div class="portlet-body">
                     <div class="row">
                         <div class="col-md-4 blog-img blog-tag-data">
-                            <ul class="list-unstyled">
+                            <ul class="list-inline">
                                 <li>
                                     <time datetime="{f:format.date(date: post.date)}">
                                         <i class="fa fa-calendar fa-fw"></i>
@@ -158,7 +158,7 @@
                                     <i class="fa fa-tags fa-fw"></i>
                                     <f:for each="{post.tags}" as="tag" iteration="iterator">
                                         <f:link.action action="search" arguments="{tag: tag.name}" controller="Search">
-                                            {tag.name}{f:if(condition:iterator.isLast, then: '', else: ',')}
+                                            {tag.name}
                                         </f:link.action>
                                     </f:for>
                                 </li>
