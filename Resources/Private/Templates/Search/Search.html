@@ -8,36 +8,38 @@
         <f:form.hidden property="sortField" id="sortfield"/>
 
         <div class="col-md-4">
-            <div class="portlet light">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <span class="caption-subject theme-font-color bold uppercase">Filter</span>
+            <f:if condition="{totalHits} > 0">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject theme-font-color bold uppercase">Filter</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <f:if condition="{totalHits} > 0">
+                            <f:for each="{aggregations}" key="aggregationName" as="aggregation">
+                                <h5>{f:translate(id: aggregationName)}</h5>
+                                <f:form.select id="{aggregationName}" property="filter.{aggregationName}" options="{aggregation}" class="jq-select" multiple="multiple"/>
+                                <script>
+                                    $("#{aggregationName}").multiselect({
+                                        maxHeight: 200,
+                                        enableFiltering: true,
+                                        numberDisplayed: 2,
+                                        onDropdownHide: function (event) {
+                                            $("#search").submit();
+                                        }
+                                    });
+                                </script>
+                            </f:for>
+                            <br />
+                            <a href="#" class="jq-filter-reset btn theme margin-top-20">
+                                <i class="fa fa-times fa-fw"></i>
+                                <f:translate id="search.filter.reset">reset all filter</f:translate>
+                            </a>
+                        </f:if>
                     </div>
                 </div>
-                <div class="portlet-body">
-                    <f:if condition="{totalHits} > 0">
-                        <f:for each="{aggregations}" key="aggregationName" as="aggregation">
-                            <h5>{f:translate(id: aggregationName)}</h5>
-                            <f:form.select id="{aggregationName}" property="filter.{aggregationName}" options="{aggregation}" class="jq-select" multiple="multiple"/>
-                            <script>
-                                $("#{aggregationName}").multiselect({
-                                    maxHeight: 200,
-                                    enableFiltering: true,
-                                    numberDisplayed: 2,
-                                    onDropdownHide: function (event) {
-                                        $("#search").submit();
-                                    }
-                                });
-                            </script>
-                        </f:for>
-                        <br />
-                        <a href="#" class="jq-filter-reset btn theme margin-top-20">
-                            <i class="fa fa-times fa-fw"></i>
-                            <f:translate id="search.filter.reset">reset all filter</f:translate>
-                        </a>
-                    </f:if>
-                </div>
-            </div>
+            </f:if>
         </div>
         <div class="col-md-8">
         <div class="page-head">

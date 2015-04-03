@@ -12,14 +12,7 @@
             <div class="portlet-body">
                 <ul class="nav nav-pills nav-stacked">
                     <f:for each="{posts}" key="identifier" as="post" iteration="postIterator">
-                        <f:if condition="{post.url}">
-                            <f:then>
-                                <li><f:link.external uri="{post.url}" target="_blank">{post.title}</f:link.external></li>
-                            </f:then>
-                            <f:else>
-                                <li><f:link.action action="show" controller="post" arguments="{post: post}">{post.title}</f:link.action></li>
-                            </f:else>
-                        </f:if>
+                        <li><f:link.action action="show" controller="post" arguments="{post: post}">{post.title}</f:link.action></li>
                     </f:for>
                 </ul>
             </div>

@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="portlet-body form">
-        <user:form action="create" actionUri="self" object="{registration}" objectName="registration" section="registration" method="POST" additionalAttributes="{role:'form'}" class="form-horizontal">
+        <user:form action="create" actionUri="self" object="{registration}" objectName="registration" section="registration" method="POST" additionalAttributes="{role:'form'}">
             <div class="form-body">
                 <f:render partial="Textfield" arguments="{label: 'Username', property: 'username', object: 'registration'}" />
                 <f:render partial="Password" arguments="{label: 'Password', property: 'password.0', object: 'registration'}" />
@@ -17,11 +17,7 @@
                 <f:render partial="Textfield" arguments="{label: 'E-Mail', property: 'email', object: 'registration'}" />
             </div>
             <div class="form-actions">
-                <div class="row">
-                    <div class="col-md-offset-3 col-md-9">
-                        <f:form.submit value="Create Account" class="btn theme" />
-                    </div>
-                </div>
+                <f:form.submit value="Create Account" class="btn theme" />
             </div>
         </user:form>
     </div>
