@@ -1,10 +1,10 @@
 <ul class="dropdown-menu">
     <li class="external">
-        <h3><span class="bold">{count} pending</span> notifications</h3>
-        <a href="extra_profile.html">view all</a>
+        <h3><span class="bold">{count} new</span> notifications</h3>
+        <a href="/user/notifications.html">view all</a>
     </li>
     <li>
-        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+        <ul class="dropdown-menu-list" data-handle-color="#637283">
             <f:for each="{events}" key="key" as="numberOfEvents">
                 <li>
                     <a href="javascript:;">
@@ -18,6 +18,8 @@
                         <f:case value="comment.created"><i class="fa fa-comments fa-fw"></i></f:case>
                     </f:switch>
                     <f:translate id="{key}" arguments="{0: numberOfEvents}" quantity="{numberOfEvents}"><span class="normal">{event} {key}</span></f:translate>
+                        </span>
+                    </a>
                 </li>
             </f:for>
         </ul>

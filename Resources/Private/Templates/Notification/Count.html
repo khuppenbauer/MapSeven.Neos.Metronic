@@ -1,3 +1,10 @@
-<a href="/Notification/list" class="dropdown-toggle jq-ajax">
-    <i class="icon-bell"></i><f:if condition="{count}"><span class="badge badge-success">{count} </span></f:if>
-</a>
+<f:if condition="{count}">
+    <f:then>
+        <a href="/Notification/list" class="dropdown-toggle jq-ajax">
+            <i class="icon-bell"></i><span class="badge badge-success">{count} </span>
+        </a>
+    </f:then>
+    <f:else>
+        <a href="/user/notifications.html" class="dropdown-toggle"><i class="icon-bell"></i></a>
+    </f:else>
+</f:if>
