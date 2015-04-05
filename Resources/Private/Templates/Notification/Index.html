@@ -1,63 +1,72 @@
-<ul class="feeds">
-    <f:for each="{notifications}" as="notification">
-        <li>
-            <div class="col1">
-                <div class="cont">
-                    <div class="cont-col1">
-                        <f:switch expression="{notification.type}">
-                            <f:case value="User.Followed">
-                                <div class="label label-sm label-info">
-                                    <i class="fa fa-user"></i>
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<snippets:security.ifAuthenticated providerName="FrontendProvider">
+    <f:then>
+        <ul class="feeds">
+            <f:for each="{notifications}" as="notification">
+                <li>
+                    <div class="col1">
+                        <div class="cont">
+                            <div class="cont-col1">
+                                <f:switch expression="{notification.type}">
+                                    <f:case value="User.Followed">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </f:case>
+                                    <f:case value="Post.Created">
+                                        <div class="label label-sm label-success">
+                                            <i class="fa fa-code"></i>
+                                        </div>
+                                    </f:case>
+                                    <f:case value="Post.Voted.Up">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </div>
+                                    </f:case>
+                                    <f:case value="Post.Voted.Down">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-thumbs-down"></i>
+                                        </div>
+                                    </f:case>
+                                    <f:case value="Post.Favored">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </f:case>
+                                    <f:case value="Comment.Created">
+                                        <div class="label label-sm label-info">
+                                            <i class="fa fa-comments"></i>
+                                        </div>
+                                    </f:case>
+                                </f:switch>
+                            </div>
+                            <div class="cont-col2">
+                                <div class="desc">
+                                    <f:if condition="{notification.post}">
+                                        <f:then>
+                                            <f:link.action action="show" controller="post" arguments="{post: notification.post}">
+                                                <f:translate id="Notification.{notification.type}" arguments="{0: notification.source.name.alias, 1: notification.post.title}" />
+                                            </f:link.action>
+                                        </f:then>
+                                        <f:else>
+                                            <f:translate id="Notification.{notification.type}" arguments="{0: notification.source.name.alias, 1: notification.post.title}" />
+                                        </f:else>
+                                    </f:if>
                                 </div>
-                            </f:case>
-                            <f:case value="Post.Created">
-                                <div class="label label-sm label-success">
-                                    <i class="fa fa-code"></i>
-                                </div>
-                            </f:case>
-                            <f:case value="Post.Voted.Up">
-                                <div class="label label-sm label-info">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </div>
-                            </f:case>
-                            <f:case value="Post.Voted.Down">
-                                <div class="label label-sm label-info">
-                                    <i class="fa fa-thumbs-down"></i>
-                                </div>
-                            </f:case>
-                            <f:case value="Post.Favored">
-                                <div class="label label-sm label-info">
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </f:case>
-                            <f:case value="Comment.Created">
-                                <div class="label label-sm label-info">
-                                    <i class="fa fa-comments"></i>
-                                </div>
-                            </f:case>
-                        </f:switch>
-                    </div>
-                    <div class="cont-col2">
-                        <div class="desc">
-                            <f:if condition="{notification.post}">
-                                <f:then>
-                                    <f:link.action action="show" controller="post" arguments="{post: notification.post}">
-                                        <f:translate id="Notification.{notification.type}" arguments="{0: notification.source.name.alias, 1: notification.post.title}" />
-                                    </f:link.action>
-                                </f:then>
-                                <f:else>
-                                    <f:translate id="Notification.{notification.type}" arguments="{0: notification.source.name.alias, 1: notification.post.title}" />
-                                </f:else>
-                            </f:if>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col2">
-                <div class="date"><f:translate id="notification.timestamp" arguments="{0: notification.timestamp}">
-                    <![CDATA[{0,datetime,date,short}]]>
-                </f:translate></div>
-            </div>
-        </li>
-    </f:for>
-</ul>
+                    <div class="col2">
+                        <div class="date"><f:translate id="notification.timestamp" arguments="{0: notification.timestamp}">
+                            <![CDATA[{0,datetime,date,short}]]>
+                        </f:translate></div>
+                    </div>
+                </li>
+            </f:for>
+        </ul>
+    </f:then>
+    <f:else>
+        <f:render partial="FlashMessages" />
+        <f:render partial="Login" />
+    </f:else>
+</snippets:security.ifAuthenticated>

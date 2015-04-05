@@ -1,33 +1,122 @@
-<div class="row">
-    <div class="large-12 columns">
-        <h3>Update Snippet</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="small-12 columns">
-        <f:form action="update" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
-            <f:render partial="FlashMessages" />
-            <br />
-            <f:form.hidden property="postType" value="{post.postType}" />
-            <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'post'}" />
-            <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'post', rows:3}" />
-            <f:if condition="{post.postType} == 'link'">
-                <f:then>
-                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.url\', value: \'Url\')}', property: 'url', object: 'post'}" />
-                </f:then>
-                <f:else>
-                    <f:render partial="TextareaMarkdown" arguments="{label: '{f:translate(id: \'form.content\', value: \'Content\')}', property: 'content', object: 'post', rows: 20, preview: true}" />
-                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'post'}" />
-                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'post'}" />
-                </f:else>
-            </f:if>
-            <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'post', properties: categories, identifier: 'text'}" />
-            <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'post', properties: tags, size: 3, identifier: 'text'}"/><br />
-            <div class="row">
-                <div class="small-12 columns">
-                    <f:form.submit value="{f:translate(id: 'form.submit.snippet.update', value: 'Update Snippet')}" class="button" />
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<div class="portlet light">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <snippets:security.ifAuthenticated providerName="FrontendProvider">
+                        <f:then>
+                            <div class="portlet-title tabbable-line">
+                                <div class="caption">
+                                    <span class="caption-subject bold theme-font-color uppercase">Update Snippet</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <f:switch expression="{post.postType}">
+                                    <f:case value="text">
+                                        <f:form action="update" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
+                                            <f:render partial="FlashMessages" />
+                                            <div class="tabs-content">
+                                                <br />
+                                                <f:form.hidden property="postType" value="text" />
+                                                <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'post'}" />
+                                                <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'post', rows:3, class: 'form-control'}" />
+                                                <f:render partial="TextareaMarkdown" arguments="{label: '{f:translate(id: \'form.content\', value: \'Content\')}', property: 'content', object: 'post', rows: 20, preview: true}" />
+                                                <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'post'}" />
+                                                <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'post'}" />
+                                                <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'post', properties: categories, identifier: 'text'}" />
+                                                <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'post', properties: tags, size: 3, identifier: 'text'}"/><br />
+                                                <f:form.submit value="{f:translate(id: 'form.submit.snippet.update', value: 'Update Snippet')}" class="btn theme" />
+                                            </div>
+                                        </f:form>
+                                    </f:case>
+                                    <f:case value="link">
+                                        <f:form action="update" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
+                                            <f:render partial="FlashMessages" />
+                                            <div class="tabs-content">
+                                                <br />
+                                                <f:form.hidden property="postType" value="link" />
+                                                <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'post'}" />
+                                                <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'post', rows:3, class:'form-control'}" />
+                                                <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.url\', value: \'Url\')}', property: 'url', object: 'post'}" />
+                                                <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'post'}" />
+                                                <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'post'}" />
+                                                <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'post', properties: categories, identifier: 'link'}" />
+                                                <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'post', properties: tags, size: 3, identifier: 'link'}"/><br />
+                                                <f:form.submit value="{f:translate(id: 'form.submit.snippet.update', value: 'Update Snippet')}" class="btn theme" />
+                                            </div>
+                                        </f:form>
+                                    </f:case>
+                                    <f:case value="package">
+                                        <f:form action="update" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
+                                            <f:render partial="FlashMessages" />
+                                            <div class="form-actions top">
+                                                <a data-toggle="modal" href="packagist.html" data-target="#packagistModal" class="btn green">Packagist</a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="packagistModal" tabindex="-1" role="dialog" aria-labelledby="Packagist" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+                                                <!-- /.modal -->
+                                            </div>
+                                            <div class="tabs-content">
+
+                                                <div class="form-body">
+                                                    <br />
+                                                    <f:form.hidden property="postType" value="package" />
+                                                    <f:form.hidden property="package" value="" id="package"/>
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'post', identifier: 'package'}" />
+                                                    <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'post', rows:3, class: 'form-control', identifier: 'package'}" />
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.url\', value: \'Url\')}', property: 'url', object: 'post', identifier: 'package'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'post', identifier: 'package'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'post', identifier: 'package'}" />
+                                                    <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'post', properties: categories, identifier: 'package'}" />
+                                                    <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'post', properties: tags, size: 3, identifier: 'package'}"/><br />
+                                                    <f:form.submit value="{f:translate(id: 'form.submit.snippet.update', value: 'Update Snippet')}" class="btn theme" />
+                                                </div>
+                                            </div>
+                                        </f:form>
+                                    </f:case>
+                                    <f:case value="reference">
+                                        <f:form action="update" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
+                                            <f:render partial="FlashMessages" />
+                                            <div class="tabs-content">
+                                                <div class="form-body">
+                                                    <br />
+                                                    <f:form.hidden property="postType" value="reference" />
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.title\', value: \'Title\')}', property: 'title', object: 'post', identifier: 'reference'}" />
+                                                    <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.description\', value: \'Description\')}', property: 'description', object: 'post', rows:3, class: 'form-control', identifier: 'reference'}" />
+                                                    <f:render partial="Textfield" arguments="{label: '{f:translate(id: \'form.url\', value: \'Url\')}', property: 'url', object: 'post', identifier: 'reference'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.comment.check\', value: \'Comment\')}', property: 'options.comment', object: 'post', identifier: 'reference'}" />
+                                                    <f:render partial="Checkbox" arguments="{label: '{f:translate(id: \'form.share.check\', value: \'Share\')}', property: 'options.share', object: 'post', identifier: 'reference'}" />
+                                                    <f:render partial="Select" arguments="{label: '{f:translate(id: \'form.category\', value: \'Category\')}', property: 'category', object: 'post', properties: categories, identifier: 'reference'}" />
+                                                    <f:render partial="Tags" arguments="{label: '{f:translate(id: \'form.tags\', value: \'Tags\')}', property: 'tags', object: 'post', properties: tags, size: 3, identifier: 'reference'}"/><br />
+                                                    <f:form.submit value="{f:translate(id: 'form.submit.snippet.update', value: 'Update Snippet')}" class="btn theme" />
+                                                </div>
+                                            </div>
+                                        </f:form>
+                                    </f:case>
+                                </f:switch>
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <div class="portlet-title tabbable-line">
+                                <div class="caption">
+                                    <span class="caption-subject bold theme-font-color uppercase"><f:translate id="snippet.login">Login to update the Snippet</f:translate>:</span>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <f:render partial="FlashMessages" />
+                                <f:render partial="Login" />
+                            </div>
+                        </f:else>
+                    </snippets:security.ifAuthenticated>
                 </div>
             </div>
-        </f:form>
+        </div>
     </div>
 </div>
