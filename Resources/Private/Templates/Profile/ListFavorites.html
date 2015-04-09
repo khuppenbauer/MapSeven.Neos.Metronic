@@ -1,0 +1,47 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<snippets:security.ifAuthenticated providerName="FrontendProvider">
+    <f:then>
+        <div class="general-item-list">
+            <f:for each="{favorites}" as="post">
+                <div class="item">
+                    <div class="item-head">
+                        <div class="item-details">
+                            <f:link.action action="show" controller="post" arguments="{post: post}">
+                                {post.title}<br />
+                            </f:link.action>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        <ul class="list-inline">
+                            <li>
+                                <f:if condition="{post.author.name.alias}">
+                                    <i class="fa fa-user fa-fw"></i>
+                                    {post.author.name.alias}
+                                </f:if>
+                            </li>
+                            <li>
+                                <i class="fa fa-folder-open fa-fw"></i>
+                                {post.category.name}
+                            </li>
+                            <li>
+                                <i class="fa fa-tags fa-fw"></i>
+                                <f:for each="{post.tags}" as="tag" iteration="iterator">
+                                    {tag.name}
+                                </f:for>
+                            </li>
+                        </ul>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="jq-up fa fa-thumbs{f:if(condition:post.upVote, then: '', else: '-o')}-up" style="cursor: pointer" data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-upVotes">{post.numberOfUpVotes}</span></li>
+                            <li><a href="#"><i class="jq-down fa fa-thumbs{f:if(condition:post.downVote, then: '', else: '-o')}-down" style="cursor: pointer"  data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-downVotes">{post.numberOfDownVotes}</span></li>
+                            <li><a href="#"><i class="jq-favor fa fa-star{f:if(condition:post.favorite, then: '', else: '-o')}" style="cursor:pointer" data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-favorites">{post.numberOfFavorites}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </f:for>
+        </div>
+    </f:then>
+    <f:else>
+        <f:render partial="FlashMessages" />
+        <f:render partial="Login" />
+    </f:else>
+</snippets:security.ifAuthenticated>

@@ -1,0 +1,28 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<snippets:security.ifAuthenticated providerName="FrontendProvider">
+    <f:then>
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    Tags
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="scroller" style="height:300px">
+                    <table class="table table-light">
+                        <f:for each="{tags}" as="tag">
+                            <tr>
+                                <td style="width: 100px; padding: 0;"><a href="#" class="jq-follow-tag pull-right btn btn-xs {f:if(condition:tag.followed, then: 'theme', else: 'default')}" data-tag="{tag -> f:format.identifier()}">{f:if(condition:tag.followed, then: 'Following', else: 'Follow')}</a></td>
+                                <td>{tag.name}</td>
+                            </tr>
+                        </f:for>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </f:then>
+    <f:else>
+        <f:render partial="FlashMessages" />
+        <f:render partial="Login" />
+    </f:else>
+</snippets:security.ifAuthenticated>
