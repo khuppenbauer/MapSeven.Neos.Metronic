@@ -1,4 +1,4 @@
-include: Library/NodeTypes.ts2
+include: NodeTypes/Footer.ts2
 namespace: TypoScript=TYPO3.TypoScript
 
 /**
@@ -36,6 +36,10 @@ page = Page {
 				@process.siteName = ${(TitleTag.resolveFromRoute('--flowpack_snippets-search.post', 'Flowpack\Snippets\Domain\Model\Post', 'title') ? TitleTag.resolveFromRoute('--flowpack_snippets-search.post', 'Flowpack\Snippets\Domain\Model\Post', 'title') : value)}
 			}
 		}
+	}
+
+	bodyTag {
+		attributes.class = 'page-header-fixed page-full-width'
 	}
 
 	body {
@@ -104,6 +108,8 @@ page = Page {
 	}
 }
 
+default < page
+
 modal < page
 modal {
 	head >
@@ -112,26 +118,14 @@ modal {
 		attributes.class = 'page-full-width'
 	}
 	body {
-		templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/Page/Modal.html'
+		templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/Page/PageModal.html'
 	}
 }
 
-fullWidth < page
-fullWidth {
-	bodyTag {
-		attributes.class = 'page-header-fixed page-full-width'
-	}
-	body {
-		templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/Page/PageSidebar.html'
-	}
-}
-
-leftSidebar < fullWidth
+leftSidebar < default
 leftSidebar {
-	bodyTag {
-		attributes.class = 'page-header-fixed'
-	}
 	body {
+		templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/Page/PageLeftSidebar.html'
 		content {
 			sidebar = PrimaryContent {
 				nodePath = 'sidebar'
@@ -142,8 +136,8 @@ leftSidebar {
 
 rightSidebar < leftSidebar
 rightSidebar {
-	bodyTag {
-		attributes.class = 'page-header-fixed page-full-width'
+	body {
+		templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/Page/PageRightSidebar.html'
 	}
 }
 

@@ -12,6 +12,31 @@
       type: 'TYPO3.Neos:ContentCollection'
   ui:
     label: Page with Footer
+    inspector:
+      groups:
+        layout:
+          label: Layout
+  properties:
+    layout:
+      type: string
+      defaultValue: page
+      ui:
+        label: 'Layout for this page only'
+        reloadIfChanged: true
+        inspector:
+          group: layout
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              page:
+                label: Page
+    showTitle:
+      type: boolean
+      ui:
+        label: 'Show Title'
+        reloadIfChanged: TRUE
+        inspector:
+          group: layout
 
 'MapSeven.Neos.Metronic:Page':
   superTypes:
@@ -27,10 +52,31 @@
       groups:
         document:
           label: Title
+        layout:
+          label: Layout
   properties:
-    'layout':
+    layout:
       type: string
-      defaultValue: 'fullWidth'
+      defaultValue: default
+      ui:
+        label: 'Layout for this page only'
+        reloadIfChanged: true
+        inspector:
+          group: layout
+          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              default:
+                label: Default
+              modal:
+                label: Modal
+    showTitle:
+      type: boolean
+      ui:
+        label: 'Show Title'
+        reloadIfChanged: TRUE
+        inspector:
+          group: layout
 
 'MapSeven.Neos.Metronic:PageWithSidebar':
   superTypes:
@@ -67,22 +113,10 @@
                 label: rightsidebar
               leftSidebar:
                 label: leftsidebar
-
-'MapSeven.Neos.Metronic:Modal':
-  superTypes:
-    - 'TYPO3.Neos:Document'
-  childNodes:
-    main:
-      type: 'TYPO3.Neos:ContentCollection'
-  ui:
-    label: Modal
-    icon: icon-file
-    position: 100
-    inspector:
-      groups:
-        document:
-          label: Title
-  properties:
-    'layout':
-      type: string
-      defaultValue: 'modal'
+    showTitle:
+      type: boolean
+      ui:
+        label: 'Show Title'
+        reloadIfChanged: TRUE
+        inspector:
+          group: layout

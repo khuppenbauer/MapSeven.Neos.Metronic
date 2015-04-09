@@ -4,18 +4,25 @@
 
     <f:render partial="Header" arguments="{parts: parts}" />
 
-    <!-- Content PageFullWidth -->
+    <!-- Content PageSidebar -->
     <div class="page-container">
-        <!-- Content -->
+            <!-- Content -->
         <div class="page-content-wrapper">
             <div class="page-content">
                 <f:render partial="Title" arguments="{parts: parts, node: node}" />
-                {content.main -> f:format.raw()}
+                <div class="row">
+                    <div class="col-md-9">
+                        {content.main -> f:format.raw()}
+                    </div>
+                    <div class="col-md-3">
+                        {content.sidebar -> f:format.raw()}
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- /Content -->
+            <!-- /Content -->
     </div>
-    <!-- /Content PageFullWidth -->
+    <!-- /Content PageSidebar -->
 
     <f:render partial="Footer" arguments="{content:content, parts:parts}"/>
     <f:render partial="Reveal" arguments="{parts:parts}"/>

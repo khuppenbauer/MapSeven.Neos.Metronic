@@ -9,12 +9,13 @@
             <!-- Content -->
         <div class="page-content-wrapper">
             <div class="page-content">
+                <f:render partial="Title" arguments="{parts: parts, node: node}" />
                 <div class="row">
-                    <div class="col-md-9">
-                        {content.main -> f:format.raw()}
-                    </div>
                     <div class="col-md-3">
                         {content.sidebar -> f:format.raw()}
+                    </div>
+                    <div class="col-md-9">
+                        {content.main -> f:format.raw()}
                     </div>
                 </div>
             </div>
