@@ -1,0 +1,18 @@
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+<div class="portlet light">
+    <f:if condition="{node.properties.title}">
+        <div class="portlet-title tabbable-line">
+            <div class="caption caption-md">
+                <span class="caption-subject font-blue-madison bold uppercase">{node.properties.title}</span>
+            </div>
+            <f:if condition="{node.properties.includeNavigation}">
+                {tabMenu -> f:format.raw()}
+            </f:if>
+        </div>
+    </f:if>
+    <div class="portlet-body">
+        <div{attributes -> f:format.raw()}>
+            <ts:render path="columns" />
+        </div>
+    </div>
+</div>

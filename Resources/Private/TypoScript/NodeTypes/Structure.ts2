@@ -1,0 +1,25 @@
+##
+# Adjust "MultiColumn" element to Twitter bootstrap CSS classes
+#
+prototype(TYPO3.Neos.NodeTypes:MultiColumn) {
+	attributes.class = 'row'
+	columns.iterationName = 'multiColumnIteration'
+}
+
+##
+# Adjust "MultiColumnItem" element to Twitter bootstrap CSS classes
+#
+prototype(TYPO3.Neos.NodeTypes:MultiColumnItem) {
+	attributes.class = ${'col-md-' + String.split(q(node).parent().property('layout'), '-')[multiColumnIteration.index]}
+}
+
+# Column TS Object
+prototype(MapSeven.Neos.Metronic:Portlet) < prototype(TYPO3.Neos.NodeTypes:MultiColumn) {
+	templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/NodeTypes/Portlet.html'
+	tabMenu = Menu {
+		entryLevel = 2
+		templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/TypoScriptObjects/Menu/TabMenu.html'
+		maximumLevels = 1
+	}
+	documentNode = ${documentNode}
+}

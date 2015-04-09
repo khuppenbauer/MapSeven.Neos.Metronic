@@ -1,0 +1,98 @@
+'MapSeven.Neos.Metronic:Portlet':
+  superTypes: ['TYPO3.Neos.NodeTypes:Column']
+  ui:
+    label: 'Portlet (with optional Navigation)'
+    position: 199
+    group: 'structure'
+    inspector:
+      groups:
+        layout:
+          label: 'Layout'
+          position: 5
+  childNodes:
+    column0:
+      type: 'TYPO3.Neos:ContentCollection'
+  properties:
+    layout:
+      defaultValue: '12'
+      ui:
+        reloadIfChanged: TRUE
+        inspector:
+          editorOptions:
+            values:
+              '12':
+                label: '100%'
+    title:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Title'
+        reloadIfChanged: TRUE
+        inspector:
+          group: layout
+    includeNavigation:
+      type: boolean
+      ui:
+        label: 'Include Navigation'
+        reloadIfChanged: TRUE
+        inspector:
+          group: layout
+
+'TYPO3.Neos.NodeTypes:TwoColumn':
+  properties:
+    layout:
+      defaultValue: '6-6'
+      ui:
+        reloadIfChanged: TRUE
+        inspector:
+          editorOptions:
+            values:
+              '50-50': ~
+              '75-25': ~
+              '25-75': ~
+              '66-33': ~
+              '33-66': ~
+              '6-6':
+                label: '50% / 50%'
+              '8-4':
+                label: '66% / 33%'
+              '4-8':
+                label: '33% / 66%'
+              '9-3':
+                label: '75% / 25%'
+              '3-9':
+                label: '25% / 75%'
+
+'TYPO3.Neos.NodeTypes:ThreeColumn':
+  properties:
+    layout:
+      defaultValue: '4-4-4'
+      ui:
+        reloadIfChanged: TRUE
+        inspector:
+          editorOptions:
+            values:
+              '33-33-33': ~
+              '50-25-25': ~
+              '25-50-25': ~
+              '25-25-50': ~
+              '4-4-4':
+                label: '33% / 33% / 33%'
+              '6-3-3':
+                label: '50% / 25% / 25%'
+              '3-6-3':
+                label: '25% / 50% / 25%'
+              '3-3-6':
+                label: '25% / 25% / 50%'
+
+'TYPO3.Neos.NodeTypes:FourColumn':
+  properties:
+    layout:
+      defaultValue: '3-3-3-3'
+      ui:
+        inspector:
+          editorOptions:
+            values:
+              '25-25-25-25': ~
+              '3-3-3-3':
+                label: '25% / 25% / 25% / 25%'

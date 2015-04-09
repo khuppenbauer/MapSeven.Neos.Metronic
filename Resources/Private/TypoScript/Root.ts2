@@ -1,4 +1,6 @@
 include: NodeTypes/Footer.ts2
+include: NodeTypes/Structure.ts2
+
 namespace: TypoScript=TYPO3.TypoScript
 
 /**
