@@ -31,9 +31,9 @@
                             </li>
                         </ul>
                         <ul class="list-inline">
-                            <li><a href="#"><i class="jq-up fa fa-thumbs{f:if(condition:post.upVote, then: '', else: '-o')}-up" style="cursor: pointer" data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-upVotes">{post.numberOfUpVotes}</span></li>
-                            <li><a href="#"><i class="jq-down fa fa-thumbs{f:if(condition:post.downVote, then: '', else: '-o')}-down" style="cursor: pointer"  data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-downVotes">{post.numberOfDownVotes}</span></li>
-                            <li><a href="#"><i class="jq-favor fa fa-star{f:if(condition:post.favorite, then: '', else: '-o')}" style="cursor:pointer" data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-favorites">{post.numberOfFavorites}</span></li>
+                            <li><a href="#"><i class="jq-up fa fa-thumbs{f:if(condition:post.upVote, then: '', else: '-o')}-up" style="cursor: pointer" data-post="{post -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}"></i></a> <span class="jq-upVotes">{post.numberOfUpVotes}</span></li>
+                            <li><a href="#"><i class="jq-down fa fa-thumbs{f:if(condition:post.downVote, then: '', else: '-o')}-down" style="cursor: pointer"  data-post="{post -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}"></i></a> <span class="jq-downVotes">{post.numberOfDownVotes}</span></li>
+                            <li><a href="#"><i class="jq-favor fa fa-star{f:if(condition:post.favorite, then: '', else: '-o')}" style="cursor:pointer" data-post="{post -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}"></i></a> <span class="jq-favorites">{post.numberOfFavorites}</span></li>
                         </ul>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
                                         <li>
                                             <i class="fa fa-tags"></i>
                                             <f:for each="{post.tags}" as="tag" iteration="iterator">
-                                                <f:link.action action="search" arguments="{tag: tag.name}" controller="Search">{tag.name}{f:if(condition:iterator.isLast, then: '', else: ',')}</f:link.action>
+                                                <f:link.action action="search" arguments="{tag: tag.name}" controller="Search">{tag.name}</f:link.action>
                                             </f:for>
                                         </li>
                                     </ul>
@@ -85,9 +85,9 @@
                             <ul class="list-inline">
                                 <snippets:security.ifAuthenticated providerName="FrontendProvider">
                                     <f:then>
-                                        <li><a href="#" class="button secondary"><i class="jq-up fa fa-thumbs{f:if(condition:post.upVote, then: '', else: '-o')}-up" style="cursor: pointer" data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-upVotes">{post.numberOfUpVotes}</span></li>
-                                        <li><a href="#" class="button secondary"><i class="jq-down fa fa-thumbs{f:if(condition:post.downVote, then: '', else: '-o')}-down" style="cursor: pointer"  data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-downVotes">{post.numberOfDownVotes}</span></li>
-                                        <li><a href="#" class="button secondary"><i class="jq-favor fa fa-star{f:if(condition:post.favorite, then: '', else: '-o')}" style="cursor:pointer" data-post="{post -> f:format.identifier()}"></i></a> <span class="jq-favorites">{post.numberOfFavorites}</span></li>
+                                        <li><a href="#" class="button secondary"><i class="jq-up fa fa-thumbs{f:if(condition:post.upVote, then: '', else: '-o')}-up" style="cursor: pointer" data-post="{post -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}"></i></a> <span class="jq-upVotes">{post.numberOfUpVotes}</span></li>
+                                        <li><a href="#" class="button secondary"><i class="jq-down fa fa-thumbs{f:if(condition:post.downVote, then: '', else: '-o')}-down" style="cursor: pointer"  data-post="{post -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}"></i></a> <span class="jq-downVotes">{post.numberOfDownVotes}</span></li>
+                                        <li><a href="#" class="button secondary"><i class="jq-favor fa fa-star{f:if(condition:post.favorite, then: '', else: '-o')}" style="cursor:pointer" data-post="{post -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}"></i></a> <span class="jq-favorites">{post.numberOfFavorites}</span></li>
                                     </f:then>
                                     <f:else>
                                         <li><a href="#"><i class="jq-up fa fa-thumbs-o-up" style="cursor: pointer"></i></a> <span class="jq-upVotes">{post.numberOfUpVotes}</span></li>
@@ -138,10 +138,11 @@
 <script type="text/javascript">
     $(document).ready(function ($) {
         var identifier = '{post -> f:format.identifier()}';
+        var csrfToken = '{f:security.csrfToken()}';
         $.ajax({
             type: 'POST',
             url: '/Post/countViews',
-            data: {post: identifier},
+            data: {post: identifier, __csrfToken: csrfToken},
             dataType: 'json'
         });
     });

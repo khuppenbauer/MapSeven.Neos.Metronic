@@ -16,7 +16,7 @@
         <!-- SIDEBAR BUTTONS -->
         <f:if condition="{user}">
             <div class="profile-userbuttons">
-                <a href="#" class="jq-follow-user btn btn-circle btn-sm {f:if(condition:post.author.followed, then: 'theme', else: 'default')}" data-user="{post.author -> f:format.identifier()}">{f:if(condition:post.author.followed, then: 'Following', else: 'Follow')}</a>
+                <a href="#" class="jq-follow-user btn btn-circle btn-sm {f:if(condition:post.author.followed, then: 'theme', else: 'default')}" data-user="{post.author -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}">{f:if(condition:post.author.followed, then: 'Following', else: 'Follow')}</a>
             </div>
         </f:if>
         <!-- END SIDEBAR BUTTONS -->

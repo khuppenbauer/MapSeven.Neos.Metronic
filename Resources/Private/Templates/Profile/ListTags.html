@@ -12,7 +12,7 @@
                     <table class="table table-light">
                         <f:for each="{tags}" as="tag">
                             <tr>
-                                <td style="width: 100px; padding: 0;"><a href="#" class="jq-follow-tag pull-right btn btn-xs {f:if(condition:tag.followed, then: 'theme', else: 'default')}" data-tag="{tag -> f:format.identifier()}">{f:if(condition:tag.followed, then: 'Following', else: 'Follow')}</a></td>
+                                <td style="width: 100px; padding: 0;"><a href="#" class="jq-follow-tag pull-right btn btn-xs {f:if(condition:tag.followed, then: 'theme', else: 'default')}" data-tag="{tag -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}">{f:if(condition:tag.followed, then: 'Following', else: 'Follow')}</a></td>
                                 <td>{tag.name}</td>
                             </tr>
                         </f:for>
