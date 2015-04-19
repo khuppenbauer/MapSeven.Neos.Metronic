@@ -10,7 +10,7 @@
                 <li class="dropdown dropdown-user dropdown-dark">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <span class="username username-hide-on-mobile">
-                        {user.name.alias} </span>
+                        <f:if condition="{user}"> {user.name.alias} </f:if></span>
                         <img alt="" class="img-circle" src="http://www.gravatar.com/avatar?d=mm">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
