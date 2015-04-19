@@ -1,0 +1,14 @@
+{namespace snippets=Flowpack\Snippets\ViewHelpers}
+<snippets:security.ifAuthenticated providerName="FrontendProvider">
+    <f:else>
+        <div id="login" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        {parts.login -> f:format.raw()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:else>
+</snippets:security.ifAuthenticated>
