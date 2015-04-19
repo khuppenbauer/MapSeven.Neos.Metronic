@@ -166,12 +166,14 @@
                                 </li>
                             </ul>
                             <ul class="list-inline">
-                                <li>
-                                    <i class="fa fa-comments fa-fw"></i>
-                                    <f:link.action action="show" controller="post" arguments="{post: post}" section="comments">
-                                        {post.numberOfComments}
-                                    </f:link.action>
-                                </li>
+                                <f:if condition="{post.options.comment}">
+                                    <li>
+                                        <i class="fa fa-comments fa-fw"></i>
+                                        <f:link.action action="show" controller="post" arguments="{post: post}" section="comments">
+                                            {post.numberOfComments}
+                                        </f:link.action>
+                                    </li>
+                                </f:if>
                                 <li>
                                     <i class="fa fa-eye fa-fw"></i>{post.numberOfViews}
                                 </li>

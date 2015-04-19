@@ -34,10 +34,12 @@
                                                 <f:link.action action="search" arguments="{author: post.author.name.alias}" controller="Search">{post.author.name.alias}</f:link.action>
                                             </li>
                                         </f:if>
-                                        <li>
-                                            <i class="fa fa-comments fa-fw"></i>
-                                            <f:link.action action="show" controller="post" arguments="{post: post}" section="comments">{post.numberOfComments}</f:link.action>
-                                        </li>
+                                        <f:if condition="{post.options.comment}">
+                                            <li>
+                                                <i class="fa fa-comments fa-fw"></i>
+                                                <f:link.action action="show" controller="post" arguments="{post: post}" section="comments">{post.numberOfComments}</f:link.action>
+                                            </li>
+                                        </f:if>
                                         <li>
                                             <i class="fa fa-eye fa-fw"></i>{post.numberOfViews}
                                         </li>
@@ -100,34 +102,37 @@
                         <f:if condition="{post.options.share}">
                             <div id="socialshareprivacy"></div>
                         </f:if>
-                        <f:if condition="{post.comments}">
-                            <hr />
-                            <h3 class="title"><f:translate id="post.comments" arguments="{0: post.numberOfComments}" quantity="{post.numberOfComments}"></f:translate></h3>
-                            <f:for each="{post.comments}" as="comment" key="flowidentifier" iteration="commentIterator" reverse="TRUE">
-                                <div class="media row">
-                                    <div class="media-body col-md-12">
-                                        <h4 class="media-heading">{comment.author.name.alias} <span><f:translate id="comment.date" arguments="{0: comment.date}"></f:translate></span></h4>
-                                        <p><f:format.nl2br>{comment.content}</f:format.nl2br></p>
+                        <f:if condition="{post.options.comment}">
+                            <a name="comments"></a>
+                            <f:if condition="{post.comments}">
+                                <hr />
+                                <h3 class="title"><f:translate id="post.comments" arguments="{0: post.numberOfComments}" quantity="{post.numberOfComments}"></f:translate></h3>
+                                <f:for each="{post.comments}" as="comment" key="flowidentifier" iteration="commentIterator" reverse="TRUE">
+                                    <div class="media row">
+                                        <div class="media-body col-md-12">
+                                            <h4 class="media-heading">{comment.author.name.alias} <span><f:translate id="comment.date" arguments="{0: comment.date}"></f:translate></span></h4>
+                                            <p><f:format.nl2br>{comment.content}</f:format.nl2br></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </f:for>
+                                </f:for>
+                            </f:if>
+                            <hr />
+                            <div class="post-comment">
+                                <snippets:security.ifAuthenticated providerName="FrontendProvider">
+                                    <f:then>
+                                        <h3><f:translate id="comment.reply">Leave a Reply</f:translate>:</h3>
+                                        <f:form action="create" arguments="{post: post}" controller="Comment" object="{newComment}" name="newComment" class="form newcomment" section="comments">
+                                            <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.comment\', value: \'Comment\')}', property: 'content', object: 'comment', rows: '8', class: 'col-md-10 form-control'}" />
+                                            <f:form.submit value="{f:translate(id: 'form.submit.comment', value: 'Add Comment')}" class="margin-top-20 btn theme" />
+                                        </f:form>
+                                    </f:then>
+                                    <f:else>
+                                        <h3><f:translate id="comment.login">Login to add your comment</f:translate>:</h3>
+                                        <f:render partial="Login" arguments="{arguments: {post: post}}" />
+                                    </f:else>
+                                </snippets:security.ifAuthenticated>
+                            </div>
                         </f:if>
-                        <hr />
-                        <div class="post-comment">
-                            <snippets:security.ifAuthenticated providerName="FrontendProvider">
-                                <f:then>
-                                    <h3><f:translate id="comment.reply">Leave a Reply</f:translate>:</h3>
-                                    <f:form action="create" arguments="{post: post}" controller="Comment" object="{newComment}" name="newComment" class="form newcomment" section="comments">
-                                        <f:render partial="Textarea" arguments="{label: '{f:translate(id: \'form.comment\', value: \'Comment\')}', property: 'content', object: 'comment', rows: '8', class: 'col-md-10 form-control'}" />
-                                        <f:form.submit value="{f:translate(id: 'form.submit.comment', value: 'Add Comment')}" class="margin-top-20 btn theme" />
-                                    </f:form>
-                                </f:then>
-                                <f:else>
-                                    <h3><f:translate id="comment.login">Login to add your comment</f:translate>:</h3>
-                                    <f:render partial="Login" arguments="{arguments: {post: post}}" />
-                                </f:else>
-                            </snippets:security.ifAuthenticated>
-                        </div>
                     </div>
                 </div>
             </div>
