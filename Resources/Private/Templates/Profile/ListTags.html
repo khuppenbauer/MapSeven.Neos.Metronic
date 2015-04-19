@@ -8,16 +8,22 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="scroller" style="height:300px">
-                    <table class="table table-light">
-                        <f:for each="{tags}" as="tag">
-                            <tr>
-                                <td style="width: 100px; padding: 0;"><a href="#" class="jq-follow-tag pull-right btn btn-xs {f:if(condition:tag.followed, then: 'theme', else: 'default')}" data-tag="{tag -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}">{f:if(condition:tag.followed, then: 'Following', else: 'Follow')}</a></td>
-                                <td>{tag.name}</td>
-                            </tr>
-                        </f:for>
-                    </table>
-                </div>
+                <f:if condition="{tags}">
+                    <f:then>
+                        <table class="table table-light">
+                            <f:for each="{tags}" as="tag">
+                                <tr>
+                                    <td style="width: 100px; padding: 0;"><a href="#" class="jq-follow-tag pull-right btn btn-xs {f:if(condition:tag.followed, then: 'theme', else: 'default')}" data-tag="{tag -> f:format.identifier()}" data-csrf-token="{f:security.csrfToken()}">{f:if(condition:tag.followed, then: 'Following', else: 'Follow')}</a></td>
+                                    <td>{tag.name}</td>
+                                </tr>
+                            </f:for>
+                        </table>
+                    </f:then>
+                    <f:else>
+                        <p><f:translate id="profile.noTags"></f:translate></p>
+                    </f:else>
+                </f:if>
+
             </div>
         </div>
     </f:then>
