@@ -56,6 +56,10 @@
     color: #ffffff;
 }
 
+.btn-link {
+    padding: 0;
+}
+
 .multiselect-container > li > a > label {
     padding-left: 10px;
 }

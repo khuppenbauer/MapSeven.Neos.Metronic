@@ -42,10 +42,50 @@
                                     <td>{post.numberOfComments}</td>
                                     <td>{post.postType}</td>
                                     <td>
-                                        <f:link.action action="show" arguments="{post: post}"><i class="fa fa-eye fa-fw"></i></f:link.action>
-                                        <f:link.action action="edit" arguments="{post: post}"><i class="fa fa-pencil fa-fw"></i></f:link.action>
-                                        <a href="#" data-reveal-id="Modal{flowidentifier}"><i class="fa fa-trash-o fa-fw"></i></a>
-
+                                        <f:form action="update" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
+                                            <f:link.action action="edit" arguments="{post: post}"><i class="fa fa-pencil fa-fw"></i></f:link.action>
+                                                <f:if condition="{post.active}">
+                                                    <f:then>
+                                                        <f:form.hidden property="active" value="0" />
+                                                        <button type="submit" title="Deactivate Post" class="btn btn-link" role="link">
+                                                            <i class="fa fa-eye fa-fw"></i>
+                                                        </button>
+                                                    </f:then>
+                                                    <f:else>
+                                                        <f:form.hidden property="active" value="1" />
+                                                        <button type="submit" title="Activate Post" class="btn btn-link" role="link">
+                                                            <i class="fa fa-eye-slash fa-fw"></i>
+                                                        </button>
+                                                    </f:else>
+                                                </f:if>
+                                            <a data-toggle="modal" href="#modal{flowidentifier}"><i class="fa fa-trash-o fa-fw"></i></a>
+                                            <f:link.action action="show" arguments="{post: post}"><i class="fa fa-external-link fa-fw"></i></f:link.action>
+                                        </f:form>
+                                        <div id="modal{flowidentifier}" class="modal fade" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                        <h4 class="modal-title"><f:translate id="post.delete">Delete Post</f:translate></h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p><f:translate id="post.delete.request" arguments="{0: post.title}">Do you really want to delete post "{0}"?</f:translate></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <f:form action="delete" object="{post}" objectName="post" method="POST" additionalAttributes="{role:'form'}">
+                                                            <button type="button" data-dismiss="modal" class="btn default">Close</button>
+                                                            <button type="submit" title="Delete Post" class="btn theme">
+                                                                <f:translate id="post.delete.confirm">Yes, delete the post</f:translate>
+                                                            </button>
+                                                        </f:form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 </f:for>
@@ -58,7 +98,7 @@
                         </script>
                     </f:then>
                     <f:else>
-                        <p><f:translate id="search.noPosts">no Posts found</f:translate></p>
+                        <p><f:translate id="profile.noPosts"></f:translate></p>
                     </f:else>
                 </f:if>
             </div>
