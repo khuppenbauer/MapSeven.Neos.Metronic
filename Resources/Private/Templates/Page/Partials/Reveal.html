@@ -1,11 +1,27 @@
 {namespace snippets=Flowpack\Snippets\ViewHelpers}
+{namespace user=Flowpack\Neos\FrontendUserManager\ViewHelpers}
 <snippets:security.ifAuthenticated providerName="FrontendProvider">
     <f:else>
         <div id="login" class="modal fade" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                        <h4 class="modal-title">Login</h4>
+                    </div>
                     <div class="modal-body">
-                        {parts.login -> f:format.raw()}
+                        <user:form action="authenticate" actionUri="self" method="post" class="login-form">
+                            <div class="form-group">
+                                <input name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][username]" class="form-control" type="text" placeholder="{f:translate(id: 'form.name', value: 'username')}" />
+                            </div>
+                            <div class="form-group">
+                                <input name="__authentication[TYPO3][Flow][Security][Authentication][Token][UsernamePassword][password]" class="form-control" type ="password" placeholder="{f:translate(id: 'form.password', value: 'password')}" />
+                            </div>
+                            <f:form.submit value="{f:translate(id: 'form.submit.login', value: 'Login')}" class="btn theme" />
+                        </user:form>
+                    </div>
+                    <div class="modal-footer">
+                        <p>Not yet an account? Register <a href="/register.html">here</a></p>
                     </div>
                 </div>
             </div>
