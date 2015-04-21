@@ -55,22 +55,22 @@
                         </div>
                         <div>
                             <f:if condition="{post.description}">
-                                <p>{post.description}</p>
+                                <p>{post.description -> f:format.nl2br()}</p>
                             </f:if>
                             {post.content -> snippets:parsedown()}
                             <f:if condition="{post.url}">
                                 <div class="row">
                                     <div class="col-md-10">
                                         <p>
-                                            <f:link.external uri="{post.url}" target="_blank"><f:if condition="{{snippets:elastica(object:post, property:'providerIcon')}}"><img src="{snippets:elastica(object:post, property:'providerIcon')}" width="16"/></f:if>
+                                            <f:link.external uri="{post.url}" target="_blank"><f:if condition="{snippets:elastica(object:post, property:'providerIcon')}"><img src="{snippets:elastica(object:post, property:'providerIcon')}" width="16"/></f:if>
                                                 {post.providerName} {post.url}
                                             </f:link.external>
                                         </p>
                                         <f:if condition="{snippets:elastica(object:post, property:'code')}">
                                             <f:then>
-                                                    <div class="embed-responsive embed-responsive-4by3">
-                                                        <f:format.raw>{snippets:elastica(object:post, property:'code')}</f:format.raw>
-                                                    </div>
+                                                <div class="embed-responsive embed-responsive-4by3">
+                                                    <f:format.raw>{snippets:elastica(object:post, property:'code')}</f:format.raw>
+                                                </div>
                                             </f:then>
                                             <f:else>
                                                 <f:if condition="{post.capture}">
