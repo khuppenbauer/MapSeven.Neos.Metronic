@@ -1,0 +1,20 @@
+{namespace form=TYPO3\Form\ViewHelpers}
+<div class="portlet light bordered">
+    <div class="portlet-title">
+        <div class="caption">
+            <span class="caption-subject bold theme-font-color uppercase">Contact</span>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <form:form action="index" object="{form}" method="post" id="{form.identifier}" enctype="multipart/form-data">
+            <div class="form-body">
+            <form:renderRenderable renderable="{form.currentPage}" />
+            </div>
+            <div class="form-actions">
+                <f:form.button name="__currentPage" value="{form.pages -> f:count()}" class="btn theme">
+                    {f:if(condition:form.renderingOptions.submitButtonLabel, then:form.renderingOptions.submitButtonLabel, else: 'Submit')}
+                </f:form.button>
+            </div>
+        </form:form>
+    </div>
+</div>

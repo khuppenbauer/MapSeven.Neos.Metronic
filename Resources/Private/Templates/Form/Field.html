@@ -1,0 +1,19 @@
+{namespace form=TYPO3\Form\ViewHelpers}
+<f:form.validationResults for="{element.identifier}">
+    <div class="form-group {f:if(condition: validationResults.flattenedErrors, then: ' has-error')}">
+        <f:if condition="validationResults.flattenedErrors">
+            <f:then>
+                <div class="input-icon right">
+                    <f:for each="{validationResults.errors}" as="error">
+                        <i data-container="body" data-original-title="{error}" class="fa fa-exclamation tooltips"></i>
+                    </f:for>
+                    <f:render section="field" />
+                </div>
+            </f:then>
+            <f:else>
+                <f:render section="field" />
+            </f:else>
+        </f:if>
+    </div>
+</f:form.validationResults>
+

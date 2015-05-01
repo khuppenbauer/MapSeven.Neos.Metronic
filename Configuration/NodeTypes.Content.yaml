@@ -19,6 +19,18 @@
         inspector:
           group: 'options'
 
+
+'TYPO3.Neos.NodeTypes:Form':
+  properties:
+    formIdentifier:
+      ui:
+        inspector:
+          editorOptions:
+            values:
+              '': null
+              Contact:
+                label: 'Contact form'
+
 'MapSeven.Neos.Metronic:Footer':
   superTypes:
     - 'TYPO3.Neos.NodeTypes:Column'

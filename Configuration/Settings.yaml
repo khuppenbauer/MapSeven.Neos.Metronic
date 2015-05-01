@@ -1,0 +1,18 @@
+TYPO3:
+  Form:
+    yamlPersistenceManager:
+      savePath: 'resource://MapSeven.Neos.Metronic/Private/Form/'
+    presets:
+      contact:
+        title: 'Contact Form'
+        parentPreset: default
+        formElementTypes:
+          'TYPO3.Form:Form':
+            renderingOptions:
+              templatePathPattern: 'resource://MapSeven.Neos.Metronic/Private/Templates/Form/Form.html'
+          'TYPO3.Form:Base':
+            renderingOptions:
+              layoutPathPattern: 'resource://MapSeven.Neos.Metronic/Private/Templates/Form/{@type}.html'
+          'TYPO3.Form:Page':
+            renderingOptions:
+              templatePathPattern: 'resource://MapSeven.Neos.Metronic/Private/Templates/Form/Page.html'

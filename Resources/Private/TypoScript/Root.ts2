@@ -1,6 +1,7 @@
 include: NodeTypes/Footer.ts2
 include: NodeTypes/Structure.ts2
 include: NodeTypes/Menu.ts2
+include: NodeTypes/ContactForm.ts2
 
 namespace: TypoScript=TYPO3.TypoScript
 
