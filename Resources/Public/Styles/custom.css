@@ -144,6 +144,15 @@
     text-decoration: underline;
 }
 
+.footer .col-md-4 {
+    text-align: center;
+}
+
+.footer a.footer-link {
+    text-decoration:none;
+    padding-left:10px;
+}
+
 .portlet.light > .portlet-title > .nav-tabs > li.active > a,
 .portlet.light > .portlet-title > .nav-tabs > li > a,
 .portlet.light > .portlet-title > .nav-tabs > li:hover > a {

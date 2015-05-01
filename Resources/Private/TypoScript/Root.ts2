@@ -1,5 +1,6 @@
 include: NodeTypes/Footer.ts2
 include: NodeTypes/Structure.ts2
+include: NodeTypes/Menu.ts2
 
 namespace: TypoScript=TYPO3.TypoScript
 
@@ -73,11 +74,6 @@ page = Page {
 						authenticated = ${Authentication.isAuthenticated(this.providerName)}
 					}
 				}
-			}
-			metaMenu = Menu {
-				maximumLevels = 1
-				startingPoint = ${q(site).children('meta').get(0)}
-				templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/TypoScriptObjects/Menu/MetaMenu.html'
 			}
 			login = Flowpack.Neos.FrontendUserManager:Login
 		}

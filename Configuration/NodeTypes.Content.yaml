@@ -1,3 +1,23 @@
+'TYPO3.Neos.NodeTypes:Menu':
+  superTypes: ['TYPO3.Neos:Content']
+  ui:
+    label: 'Menu'
+    group: 'structure'
+    icon: 'icon-sitemap'
+    position: 100
+    inspector:
+      groups:
+        options:
+          label: 'Options'
+          position: 30
+  properties:
+    startingPoint:
+      type: 'reference'
+      ui:
+        reloadIfChanged: TRUE
+        label: 'StartingPoint'
+        inspector:
+          group: 'options'
 
 'MapSeven.Neos.Metronic:Footer':
   superTypes:
