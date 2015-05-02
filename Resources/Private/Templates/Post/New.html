@@ -6,28 +6,29 @@
                 <div class="portlet light bordered">
                     <snippets:security.ifAuthenticated providerName="FrontendProvider">
                         <f:then>
+                            <snippets:form.property name="postType" property="newPost.postType" default="text" />
                             <div class="portlet-title tabbable-line">
                                 <div class="caption">
                                     <span class="caption-subject bold theme-font-color uppercase">New Snippet</span>
                                 </div>
                                 <ul class="nav nav-tabs">
-                                    <li class="active">
+                                    <li{f:if(condition: '{0: postType} == {0: \'text\'}', then: ' class="active"')}>
                                         <a href="#portlet_text" data-toggle="tab">Text</a>
                                     </li>
-                                    <li>
+                                    <li{f:if(condition: '{0: postType} == {0: \'link\'}', then: ' class="active"')}>
                                         <a href="#portlet_link" data-toggle="tab">Link</a>
                                     </li>
-                                    <li>
+                                    <li{f:if(condition: '{0: postType} == {0: \'package\'}', then: ' class="active"')}>
                                         <a href="#portlet_package" data-toggle="tab">Package</a>
                                     </li>
-                                    <li>
+                                    <li{f:if(condition: '{0: postType} == {0: \'reference\'}', then: ' class="active"')}>
                                         <a href="#portlet_reference" data-toggle="tab">Reference</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="portlet-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="portlet_text">
+                                    <div class="tab-pane{f:if(condition: '{0: postType} == {0: \'text\'}', then: ' active')}" id="portlet_text">
                                         <div class="scroller" style="height: 670px;">
                                             <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
                                                 <f:render partial="FlashMessages" />
@@ -46,7 +47,7 @@
                                             </f:form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="portlet_link">
+                                    <div class="tab-pane{f:if(condition: '{0: postType} == {0: \'link\'}', then: ' active')}" id="portlet_link">
                                         <div class="scroller" style="height: 450px;">
                                             <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
                                                 <f:render partial="FlashMessages" />
@@ -65,7 +66,7 @@
                                             </f:form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="portlet_package">
+                                    <div class="tab-pane{f:if(condition: '{0: postType} == {0: \'package\'}', then: ' active')}" id="portlet_package">
                                         <div class="scroller" style="height: 470px;">
                                             <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
                                                 <f:render partial="FlashMessages" />
@@ -101,7 +102,7 @@
                                             </f:form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="portlet_reference">
+                                    <div class="tab-pane{f:if(condition: '{0: postType} == {0: \'reference\'}', then: ' active')}" id="portlet_reference">
                                         <div class="scroller" style="height: 450px;">
                                             <f:form action="create" object="{newPost}" objectName="newPost" method="POST" additionalAttributes="{role:'form'}">
                                                 <f:render partial="FlashMessages" />
