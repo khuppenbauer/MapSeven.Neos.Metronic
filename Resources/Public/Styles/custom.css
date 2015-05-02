@@ -64,6 +64,11 @@
     padding-left: 10px;
 }
 
+.select2-error .input-icon.right > i {
+    right: 18px;
+    top: -3px;
+}
+
 .pagination {
     margin: 0;
 }

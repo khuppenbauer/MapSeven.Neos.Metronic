@@ -1,7 +1,0 @@
-<div class="form-group">
-    <f:form.select id="{property}-{identifier}" property="{property}" options="{properties}" optionLabelField="name" prependOptionLabel="- {label} -" multiple="multiple" errorClass="error" style="width:100%" />
-    <f:render partial="Errors" arguments="{property: property, object: object}" />
-    <script>
-        $("#{property}-{identifier}").multiselect();
-    </script>
-</div>

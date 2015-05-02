@@ -1,21 +1,26 @@
 {namespace snippets=Flowpack\Snippets\ViewHelpers}
-<div class="form-group">
-    <snippets:form.multiselect id="{property}-{identifier}" property="{property}" placeholder="{label}" style="width:100%" errorClass="error" />
-
-    <f:render partial="Errors" arguments="{property: property, object: object}" />
-    <script>
-        $(document).ready(function () <![CDATA[{]]>
-            $("#{property}-{identifier}").select2(<![CDATA[{]]>
-                placeholder: "{label}",
-                createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
-                multiple: true,
-                data: [
-                    <f:for each="{properties}" as="tag" iteration="iterator">
-                        <![CDATA[{]]>id: "{tag -> f:format.identifier()}", text: "{tag.name}"}{f:if(condition:iterator.isLast, then: '', else: ',')}
-                    </f:for>
-                ],
-                tokenSeparators: [",", " "]
+<f:form.validationResults for="{object}.{property}">
+    <div class="form-group{f:if(condition: validationResults.flattenedErrors, then: ' has-error')}">
+        <div class="input-icon right">
+            <f:for each="{validationResults.errors}" as="error">
+                <i data-container="body" data-original-title="{error}" class="fa fa-exclamation tooltips"></i>
+            </f:for>
+            <snippets:form.multiselect id="{property}-{identifier}" property="{property}" placeholder="{label}" style="width:100%" errorClass="error" />
+        </div>
+        <script>
+            $(document).ready(function () <![CDATA[{]]>
+                $("#{property}-{identifier}").select2(<![CDATA[{]]>
+                    placeholder: "{label}",
+                    createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
+                    multiple: true,
+                    data: [
+                            <f:for each="{properties}" as="tag" iteration="iterator">
+                <![CDATA[{]]>id: "{tag -> f:format.identifier()}", text: "{tag.name}"}{f:if(condition:iterator.isLast, then: '', else: ',')}
+            </f:for>
+            ],
+            tokenSeparators: [",", " "]
             });
-        });
-    </script>
-</div>
+            });
+        </script>
+    </div>
+</f:form.validationResults>

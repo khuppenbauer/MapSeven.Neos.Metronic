@@ -1,4 +1,10 @@
-<div class="form-group">
-   <f:form.textarea id="{identifier}{property}" class="{class}" property="{property}" placeholder="{label}" rows="{rows}" errorClass="error" />
-   <f:render partial="Errors" arguments="{property: property, object: object}" />
-</div>
+<f:form.validationResults for="{object}.{property}">
+    <div class="form-group{f:if(condition: validationResults.flattenedErrors, then: ' has-error')}">
+        <div class="input-icon right">
+            <f:for each="{validationResults.errors}" as="error">
+                <i data-container="body" data-original-title="{error}" class="fa fa-exclamation tooltips"></i>
+            </f:for>
+            <f:form.textarea id="{identifier}{property}" class="{class}" property="{property}" placeholder="{label}" rows="{rows}" errorClass="error" />
+        </div>
+    </div>
+</f:form.validationResults>

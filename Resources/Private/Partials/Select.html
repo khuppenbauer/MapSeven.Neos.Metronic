@@ -1,7 +1,13 @@
-<div class="form-group">
-    <f:form.select id="{property}-{identifier}" property="{property}" options="{properties}" optionLabelField="name" prependOptionLabel="- {label} -" class="select2" errorClass="error" style="width:100%" />
-    <f:render partial="Errors" arguments="{property: property, object: object}" />
-    <script>
-        $("#{property}-{identifier}").select2();
-    </script>
-</div>
+<f:form.validationResults for="{object}.{property}">
+    <div class="form-group{f:if(condition: validationResults.flattenedErrors, then: ' has-error select2-error')}">
+        <div class="input-icon right">
+            <f:for each="{validationResults.errors}" as="error">
+                <i data-container="body" data-original-title="{error}" class="fa fa-exclamation tooltips"></i>
+            </f:for>
+            <f:form.select id="{property}-{identifier}" property="{property}" options="{properties}" optionLabelField="name" prependOptionLabel="- {label} -" class="select2" errorClass="error" style="width:100%" />
+        </div>
+        <script>
+            $("#{property}-{identifier}").select2();
+        </script>
+    </div>
+</f:form.validationResults>
