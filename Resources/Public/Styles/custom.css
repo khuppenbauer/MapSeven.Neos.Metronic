@@ -158,6 +158,10 @@
     padding-left:10px;
 }
 
+.footer p {
+    text-align:left;
+}
+
 .portlet.light > .portlet-title > .nav-tabs > li.active > a,
 .portlet.light > .portlet-title > .nav-tabs > li > a,
 .portlet.light > .portlet-title > .nav-tabs > li:hover > a {
