@@ -25,8 +25,6 @@ page = Page {
 			sectionName = 'scripts'
 		}
 
-		stylesheets.foundation >
-
 		titleTag {
 			// Overwrite the title tags content with a collection to create a breadcrumb
 			content = TYPO3.TypoScript:Collection {
@@ -94,8 +92,6 @@ page = Page {
 			templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/Page/Default.html'
 			sectionName = 'bodyScripts'
 		}
-
-		javascripts.foundation >
 
 	}
 	@cache {
