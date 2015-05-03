@@ -210,6 +210,10 @@ pre code {
     overflow: auto;
 }
 
+hr {
+    margin: 20px 0 5px 0;
+}
+
 .tabbable-line > .nav-tabs > li.active {
     border-bottom: 4px solid #5b9bd1;
 }

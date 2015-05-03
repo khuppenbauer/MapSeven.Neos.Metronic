@@ -122,6 +122,14 @@
                         </f:if>
                     </div>
                 </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="checkbox">
+                            <label><f:form.checkbox property="embed" id="embed" value="embed" /> Embed external Resources </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -208,17 +216,19 @@
                                             by <f:link.external uri="{post.authorUrl}" target="_blank">{post.authorName}</f:link.external>
                                         </f:if>
                                     </p>
-                                    <f:if condition="{post.code}">
-                                        <f:then>
-                                            <div class="embed-{post.providerName}">
-                                                <f:format.raw>{post.code}</f:format.raw>
-                                            </div>
-                                        </f:then>
-                                        <f:else>
-                                            <f:if condition="{post.capture}">
-                                                <snippets:image resource="{post.capture}" type="thumbnail" class="img-responsive" alt="{post.title}"/>
-                                            </f:if>
-                                        </f:else>
+                                    <f:if condition="{search.embed}">
+                                        <f:if condition="{post.code}">
+                                            <f:then>
+                                                <div class="embed-{post.providerName}">
+                                                    <f:format.raw>{post.code}</f:format.raw>
+                                                </div>
+                                            </f:then>
+                                            <f:else>
+                                                <f:if condition="{post.capture}">
+                                                    <snippets:image resource="{post.capture}" type="thumbnail" class="img-responsive" alt="{post.title}"/>
+                                                </f:if>
+                                            </f:else>
+                                        </f:if>
                                     </f:if>
                                 </div>
                             </f:if>
