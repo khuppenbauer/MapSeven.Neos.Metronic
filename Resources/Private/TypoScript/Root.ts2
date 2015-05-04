@@ -56,7 +56,7 @@ page = Page {
 			}
 			userMenu = Menu {
 				maximumLevels = 1
-				startingPoint = ${q(site).children('user').get(0)}
+				startingPoint = ${q(site).children('[uriPathSegment="user"]').get(0)}
 				templatePath = 'resource://MapSeven.Neos.Metronic/Private/Templates/TypoScriptObjects/Menu/UserMenu.html'
 				userObject = ${Configuration.setting('Flowpack.Neos.FrontendUserManager.userObject')}
 				providerName = ${Configuration.setting('Flowpack.Neos.FrontendUserManager.providerName')}
