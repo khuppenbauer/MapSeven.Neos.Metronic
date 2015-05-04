@@ -65,7 +65,8 @@
                             <f:if condition="{postType} == {key}">
                                 <f:then> class="active"</f:then>
                             </f:if>
-                            ><a href="#" data-postType="{key}">{label}</a></li>
+                            ><a href="#" data-postType="{key}"><i class="fa fa-<snippets:configuration settingPath="Flowpack.Snippets.elasticSearch.postTypeIcons.{key}" />"></i> {label}</a>
+                            </li>
                         </f:for>
                     </f:for>
                 </ul>
@@ -194,6 +195,7 @@
                             </ul>
                         </div>
                         <div class="col-md-8 blog-article">
+                            <i class="fa fa-<snippets:configuration settingPath="Flowpack.Snippets.elasticSearch.postTypeIcons.{post.postType}" />"></i>
                             <h3>
                                 <f:link.action action="show" controller="post" arguments="{post: post}">{post.title}
                                 </f:link.action>

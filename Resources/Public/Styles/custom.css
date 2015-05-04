@@ -106,6 +106,15 @@
     margin-top: 0;
 }
 
+.blog-article i {
+    float:right;
+    color: #e5e5e5;
+}
+
+.blog-tag-data li i {
+    color: #5b9bd1;
+}
+
 .blog-tag-data li a {
     margin-right: 0;
 }
